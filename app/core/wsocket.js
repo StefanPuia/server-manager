@@ -56,6 +56,7 @@ module.exports = function(app) {
 													log: JSON.parse(string)
 												}
 												running.logs.push(log);
+												running.port = message.port;
 												util.updateServer(running, JSON.parse(fileData).servers, function(servers) {
 													fs.writeFile(config.servers, JSON.stringify(servers, null, 4));
 													wsAllSend(string);
@@ -82,6 +83,7 @@ module.exports = function(app) {
 												log: JSON.parse(string)
 											}
 											server.logs.push(log);
+											server.port = message.port;
 											util.updateServer(server, JSON.parse(fileData).servers, function(servers) {
 												fs.writeFile(config.servers, JSON.stringify(servers, null, 4));
 												wsAllSend(string);
@@ -112,6 +114,28 @@ module.exports = function(app) {
 					util.findServerByName(message.name, runningServers, function(running) {
 						if(running && typeof running.running != 'undefined' && running.running == true) {
 							running.process.kill();
+							running.running = false;
+							wsAllSend(JSON.stringify({
+								name: running.name,
+								type: 'status',
+								status: config.status.stopped
+							}));
+						}
+						else {
+							wsAllSend(JSON.stringify({
+								name: message.name,
+								type: 'status',
+								status: config.status.notfound
+							}));
+						}
+					});
+				break;
+
+				case 'send':
+					util.findServerByName(message.name, runningServers, function(running) {
+						if(running && typeof running.running != 'undefined' && running.running == true) {
+							running.process.stdin.setEncoding('utf-8');
+							running.process.stdin.write(`${message.payload}\n`);
 							running.running = false;
 							wsAllSend(JSON.stringify({
 								name: running.name,

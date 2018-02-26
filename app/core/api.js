@@ -18,6 +18,21 @@ module.exports = function(app, server) {
 		})
 	})
 
+	app.get('/api/server/:name', function(req, res) {
+		fs.readFile(config.servers, 'utf8', function(err, data) {
+			if(err) throw(err);
+			data = JSON.parse(data);
+			util.findServerByName(req.params.name, data.servers, function(server) {
+				if(server) {
+					res.json(server);
+				}
+				else {
+					res.sendStatus(404);
+				}
+			})
+		})
+	})
+
 	app.get('/api/server/:name/logs', function(req, res) {
 		fs.readFile(config.servers, 'utf8', function(err, data) {
 			if(err) throw(err);

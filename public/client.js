@@ -6,6 +6,7 @@ let statuses = ['starting', 'running', 'stopping', 'stopped', 'error', 'not foun
 
 window.addEventListener('load', function() {
     ws.addEventListener('message', receivedMessageFromServer);
+    $('#server-search')[0].addEventListener('input', serverSearch);
 
     callServer('/api/server', {}, function(servers) {
     	parseServers(servers);
@@ -131,7 +132,10 @@ function serverStop(e) {
 }
 
 function serverVisit(e) {
-	window.open('/?port=' + e.currentTarget.dataset.port);
+    let name = e.currentTarget.dataset.name;
+    callServer('/api/server/' + name, {}, function(data) {
+        window.open('/?port=' + data.port);
+    })
 }
 
 function serverSettings(e) {
@@ -143,4 +147,36 @@ function serverLogs(e) {
 	callServer('/api/server/' + name + '/logs', {}, function(data) {
     	log(JSON.stringify(data, null, 4));
 	});
+}
+
+function serverSearch() {
+    let query = $('#server-search')[0].value.toLowerCase();
+
+    let servers = $('.server');
+
+    servers.forEach(function(server) {
+        if(server.dataset.name.indexOf(query) != -1) {
+            server.style.display = 'block';
+        }
+        else {
+            server.style.display = 'none';
+        }
+    })
+}
+
+function serverSend(server, command) {
+    let payload = {
+        method: 'stop',
+        name: server,
+        payload: command
+    }
+    callSocket(payload);
+}
+
+function serverClearLogs(server) {
+    let payload = {
+        method: 'clearlogs',
+        name: server
+    }
+    callSocket(payload);
 }

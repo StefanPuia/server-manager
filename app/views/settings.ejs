@@ -14,36 +14,69 @@
 				<!-- Brand and toggle get grouped for better mobile display -->
 				<div class="navbar-header">
 					<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
-						<span class="sr-only">Toggle navigation</span>
-						<span class="icon-bar"></span>
-						<span class="icon-bar"></span>
-						<span class="icon-bar"></span>
+					<span class="sr-only">Toggle navigation</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
 					</button>
 					<a class="navbar-brand" href="/">Server Manager</a>
 				</div>
-		
+				
 				<!-- Collect the nav links, forms, and other content for toggling -->
 				<div class="collapse navbar-collapse navbar-ex1-collapse">
 					<ul class="nav navbar-nav navbar-left">
 						<li><a href="/"><i class="glyphicon glyphicon-arrow-left"></i> Back</a></li>
 					</ul>
-					<div class="navbar-form navbar-left">
-						<div class="form-group">
-							<input type="text" class="form-control" placeholder="Search">
-						</div>
-					</div>
 					<ul class="nav navbar-nav navbar-right">
 						<li class="active"><a href="/settings"><i class="glyphicon glyphicon-wrench"></i> Settings</a></li>
 					</ul>
-				</div><!-- /.navbar-collapse -->
+					</div><!-- /.navbar-collapse -->
+				</div>
+			</nav>
+			<main class="container">
+				<div class="row">
+					<div class="col-md-8" id="server-settings">
+						<div class="center">
+							<h3 id="server-name"></h3>
+						</div>
+						<form class="form-horizontal">
+							<div class="form-group">
+								<label for="inputEmail3" class="col-sm-2 control-label">Email</label>
+								<div class="col-sm-10">
+									<input type="email" class="form-control" id="inputEmail3" placeholder="Email">
+								</div>
+							</div>
+							<div class="form-group">
+								<label for="inputPassword3" class="col-sm-2 control-label">Password</label>
+								<div class="col-sm-10">
+									<input type="password" class="form-control" id="inputPassword3" placeholder="Password">
+								</div>
+							</div>
+							<div class="form-group">
+								<div class="col-sm-offset-2 col-sm-10">
+									<div class="checkbox">
+										<label>
+											<input type="checkbox"> Remember me
+										</label>
+									</div>
+								</div>
+							</div>
+							<div class="form-group">
+								<div class="col-sm-offset-2 col-sm-10">
+									<button type="submit" class="btn btn-default">Sign in</button>
+								</div>
+							</div>
+						</form>
+					</div>
+					<div class="col-md-4">
+					<ul class="nav nav-pills nav-stacked" id="server-list"></ul>
+				</div>
 			</div>
-		</nav>
-
-		<main class="container">
-			
 		</main>
 		
 		<script src="http://code.jquery.com/jquery-2.2.4.min.js"></script>
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+		<script src="public/parser.js"></script>
+		<script src="public/settings.js"></script>
 	</body>
 </html>

@@ -96,11 +96,33 @@ function reset_awaitConfirmation() {
 	}
 }
 
-function run_help() {
-	log(functions.help.desc);
-	Object.keys(functions).forEach(function(k){
-		log(k.toUpperCase() + "    " + functions[k].desc);
-	});
+function run_help(params) {
+	if(params[0]) {
+		let f = null;
+		Object.keys(functions).forEach(function(k){
+			if(k == params[0]) {
+				f = functions[k];
+				f.name = k;
+			}
+		});
+		if(f) {
+			log(f.name.toUpperCase() + "    " + functions[f.name].desc);
+			if(f.vars) {
+				Object.keys(f.vars).forEach(function(v){
+					log(f.vars[v].name.toUpperCase() + "    " + f.vars[v].desc);
+				})
+			}
+		}
+		else {
+			log(`Help for '${params[0]}' not found. Try "help".`);
+		}
+	}
+	else {
+		log(functions.help.desc);
+		Object.keys(functions).forEach(function(k){
+			log(k.toUpperCase() + "    " + functions[k].desc);
+		});
+	}
 }
 
 function run_clear() {
@@ -122,6 +144,12 @@ function run_stop(params) {
 function run_restart(params) {
 	let e = createEventTarget(params[0]);
 	serverRestart(e);
+}
+
+function run_send(params) {
+	let server = params[0];
+	let command = params[1];
+	serverSend(server, command);
 }
 
 function run_logs(params) {
@@ -151,6 +179,58 @@ function run_accept() {
 	}
 }
 
+function run_console(params) {
+	let console = $('#console')[0];
+	let main = $('main')[0];
+	switch (params[0]) {
+		case 'height':
+			if(params[1] && params[1].match(/[0-9]+/g) && params[1] > 0) {
+				console.style.height = params[1] + 'vh';
+				main.style.marginBottom = parseInt(params[1] + 10) + 'vh';
+			}
+			else {
+				log(`Parameter value required.`);
+			}
+		break;
+
+		case 'foreground':
+			if(params[1]) {
+				if(params[1] == 'default') {
+					console.style.color = "#333";
+				}
+				else {
+					console.style.color = params[1];
+				}
+			}
+			else {
+				log(`Parameter value required.`);
+			}
+		break;
+
+		case 'background':
+			if(params[1]) {
+				if(params[1] == 'default') {
+					console.style.backgroundColor = "#f5f5f5";
+				}
+				else {
+					console.style.backgroundColor = params[1];
+				}
+			}
+			else {
+				log(`Parameter value required.`);
+			}
+		break;
+
+		default:
+			log(`Parameter '${params[0]}' not valid for this function. Try "help console".`)
+		break;
+	} 
+}
+
+function run_clearlogs(params) {
+	serverClearLogs(params[0]);
+}
+
 let functions = {
 	"help":	{
 		desc: "show all functions",
@@ -175,5 +255,27 @@ let functions = {
 	"logs": {
 		desc: "get the server logs: logs [servername]",
 		function: "run_logs"
+	},
+	"send": {
+		desc: "send a command to a running server: send [servername] [command]",
+		function: "run_send"
+	},
+	"console": {
+		desc: "set or get console variables: console <var> <value>",
+		function: "run_console",
+		vars: [{
+			name: "height",
+			desc: "change the height of the console 15 < h < 90 (vw)"
+		}, {
+			name: "foreground",
+			desc: "change the foreground colour hex/rgb/name"
+		}, {
+			name: "background",
+			desc: "change the background colour hex/rgb/name"
+		}]
+	}, 
+	"clearlogs": {
+		desc: "clears the server logs. CANNOT BE UNDONE.",
+		function: "run_clearlogs"
 	}
 }

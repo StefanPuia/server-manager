@@ -10,18 +10,14 @@ function newEl(tag, attr = {}) {
 }
 
 function parseServers(servers) {
-	let main = $('main')[0];
+	let row = $('main .row')[0];
 
 	for(let i = 0; i < servers.length / 3; i++) {
-		let rowDiv = newEl('div', {
-			classList: "row"
-		});
-
 		for(let j = 0; j < 3 && typeof servers[i*3 + j] != 'undefined'; j++) {
 			let server = servers[i*3 + j];
 
 			let serverDiv = newEl('div', {
-				classList: "col-md-4 center"
+				classList: "col-md-4 center server"
 			});
 			serverDiv.append(newEl('h2', {
 				textContent: server.name
@@ -29,6 +25,7 @@ function parseServers(servers) {
 
 			let temp;
 			server.name = server.name.toLowerCase();
+			serverDiv.dataset.name = server.name;
 
 			temp = newEl('input', {
 				value: server.port,
@@ -91,10 +88,8 @@ function parseServers(servers) {
 			temp.dataset.port = server.port;
 			serverDiv.append(temp);
 
-			rowDiv.append(serverDiv);
+			row.append(serverDiv);
 		}
-
-		main.append(rowDiv);
 	}
 
 

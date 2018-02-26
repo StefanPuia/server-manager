@@ -9,7 +9,11 @@
 body {
 	margin: 0;
 	padding: 0;
-	padding-top: 3em;
+}
+
+main {
+	margin-top: 5em;
+	margin-bottom: 40vh;
 }
 
 #console {
@@ -24,7 +28,8 @@ body {
 	border-radius: 0;
 	font-size: 12px;
 	height: 30vh;
-	max-height: 40vh;
+	max-height: 90vh;
+	min-height: 15vh;
 	white-space: pre-wrap;
 	word-wrap: break-word;
 }
@@ -44,4 +49,12 @@ body {
     right: 0;
     width: 100vw;
     bottom: 0;
+}
+
+.server {
+	padding-bottom: 3em;
+}
+
+#server-settings {
+	visibility: hidden;
 }
