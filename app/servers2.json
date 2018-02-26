@@ -1,0 +1,19 @@
+[{
+    "name": "EZWallet",
+    "path": "C:/Users/steph/Documents/GitHub/EZWallet/index.js",
+    "config": "C:/Users/steph/Documents/GitHub/EZWallet/app/config/index.js",
+    "portvar": "serverPort",
+    "port": 8082
+}, {
+    "name": "WS-Planner",
+    "path": "C:/Users/steph/Documents/GitHub/WS-Planner/index.js",
+    "config": "C:/Users/steph/Documents/GitHub/WS-Planner/app/config/index.js",
+    "portvar": "serverPort",
+    "port": 8085
+}, {
+    "name": "kissanime-bookmark-view",
+    "path": "C:/Users/steph/Documents/GitHub/kissanime-bookmark-view/server.js",
+    "config": "C:/Users/steph/Documents/GitHub/kissanime-bookmark-view/server.js",
+    "portvar": "defaultPort",
+    "port": 8090
+}]
