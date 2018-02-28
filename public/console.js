@@ -132,27 +132,42 @@ function run_clear() {
 }
 
 function run_start(params) {
+	if(params.length == 0) {
+		log(functions['start'].desc);
+	}
 	let e = createEventTarget(params[0]);
 	serverStart(e);
 }
 
 function run_stop(params) {
+	if(params.length == 0) {
+		log(functions['stop'].desc);
+	}
 	let e = createEventTarget(params[0]);
 	serverStop(e);
 }
 
 function run_restart(params) {
+	if(params.length == 0) {
+		log(functions['restart'].desc);
+	}
 	let e = createEventTarget(params[0]);
 	serverRestart(e);
 }
 
 function run_send(params) {
+	if(params.length == 0) {
+		log(functions['send'].desc);
+	}
 	let server = params[0];
 	let command = params[1];
 	serverSend(server, command);
 }
 
 function run_logs(params) {
+	if(params.length == 0) {
+		log(functions['logs'].desc);
+	}
 	callServer('/api/server/' + params[0] + '/logs', {}, function(data) {
     	let stdout = JSON.stringify(data, null, 4);
     	if(stdout.length > 1000) {
@@ -228,6 +243,9 @@ function run_console(params) {
 }
 
 function run_clearlogs(params) {
+	if(params.length == 0) {
+		log(functions['clearlogs'].desc);
+	}
 	serverClearLogs(params[0]);
 }
 

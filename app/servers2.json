@@ -1,19 +1,14 @@
-[{
-    "name": "EZWallet",
-    "path": "C:/Users/steph/Documents/GitHub/EZWallet/index.js",
-    "config": "C:/Users/steph/Documents/GitHub/EZWallet/app/config/index.js",
-    "portvar": "serverPort",
-    "port": 8082
-}, {
-    "name": "WS-Planner",
-    "path": "C:/Users/steph/Documents/GitHub/WS-Planner/index.js",
-    "config": "C:/Users/steph/Documents/GitHub/WS-Planner/app/config/index.js",
-    "portvar": "serverPort",
-    "port": 8085
-}, {
-    "name": "kissanime-bookmark-view",
-    "path": "C:/Users/steph/Documents/GitHub/kissanime-bookmark-view/server.js",
-    "config": "C:/Users/steph/Documents/GitHub/kissanime-bookmark-view/server.js",
-    "portvar": "defaultPort",
-    "port": 8090
-}]
+{
+    "servers": [
+        {
+            "name": "EZWallet",
+            "parameters": "C:/Users/steph/Documents/GitHub/EZWallet/index.js",
+            "config": "C:/Users/steph/Documents/GitHub/EZWallet/app/config/index.js",
+            "portvar": "serverPort",
+            "port": "8082",
+            "running": false,
+            "app": "node.exe",
+            "logs": "27 Feb 2018 15:46:09\nstderr\nevents.js:160\r\n      throw er; // Unhandled 'error' event\r\n      ^\r\n\r\nError: listen EADDRINUSE :::8080\r\n    at Object.exports._errnoException (util.js:1020:11)\r\n    at exports._exceptionWithHostPort (util.js:1043:20)\r\n    at Server._listen2 (net.js:1262:14)\r\n    at listen (net.js:1298:10)\r\n    at Server.listen (net.js:1394:5)\r\n    at EventEmitter.listen (fakepath\\application.js:618:24)\r\n    at Object.<anonymous> (fakepath\\index.js:18:9)\r\n    at Module._compile (module.js:570:32)\r\n    at Object.Module._extensions..js (module.js:579:10)\r\n    at Module.load (module.js:487:32)\r\n\n27 Feb 2018 15:46:09\nexit\n1\n27 Feb 2018 15:49:24\nstderr\nevents.js:160\r\n      throw er; // Unhandled 'error' event\r\n      ^\r\n\r\nError: listen EADDRINUSE :::8080\r\n    at Object.exports._errnoException (util.js:1020:11)\r\n    at exports._exceptionWithHostPort (util.js:1043:20)\r\n    at Server._listen2 (net.js:1262:14)\r\n    at listen (net.js:1298:10)\r\n    at Server.listen (net.js:1394:5)\r\n    at EventEmitter.listen (fakepath\\application.js:618:24)\r\n    at Object.<anonymous> (fakepath\\index.js:18:9)\r\n    at Module._compile (module.js:570:32)\r\n    at Object.Module._extensions..js (module.js:579:10)\r\n    at Module.load (module.js:487:32)\r\n\n27 Feb 2018 15:49:24\nexit\n1\n27 Feb 2018 15:49:37\nstdout\nListening on 8080.\n\n27 Feb 2018 15:57:23\nstdout\nListening on 8080.\n\n27 Feb 2018 15:58:24\nstdout\nListening on 8080.\n\n27 Feb 2018 15:59:16\nstdout\nListening on 8080.\n\n27 Feb 2018 15:59:53\nstdout\nListening on 8080.\n\n27 Feb 2018 16:01:03\nstdout\nListening on 8080.\n\n27 Feb 2018 16:01:55\nstdout\nListening on 8080.\n\n27 Feb 2018 16:02:34\nstdout\nListening on 8080.\n\n27 Feb 2018 16:03:11\nstdout\nListening on 8080.\n\n27 Feb 2018 16:03:42\nstdout\nListening on 8080.\n\n27 Feb 2018 16:04:03\nstdout\nListening on 8080.\n\n27 Feb 2018 16:04:23\nstdout\nListening on 8080.\n\n27 Feb 2018 16:05:33\nstdout\nListening on 8080.\n\n27 Feb 2018 16:06:25\nstdout\nListening on 8080.\n\n27 Feb 2018 16:06:50\nstdout\nListening on 8080.\n\n27 Feb 2018 16:07:05\nstdout\nListening on 8080.\n\n27 Feb 2018 16:09:34\nstdout\nListening on 8080.\n\n27 Feb 2018 16:09:50\nstderr\nevents.js:160\r\n      throw er; // Unhandled 'error' event\r\n      ^\r\n\r\nError: listen EADDRINUSE :::8080\r\n    at Object.exports._errnoException (util.js:1020:11)\r\n    at exports._exceptionWithHostPort (util.js:1043:20)\r\n    at Server._listen2 (net.js:1262:14)\r\n    at listen (net.js:1298:10)\r\n    at Server.listen (net.js:1394:5)\r\n    at EventEmitter.listen (fakepath\\application.js:618:24)\r\n    at Object.<anonymous> (fakepath\\index.js:18:9)\r\n    at Module._compile (module.js:570:32)\r\n    at Object.Module._extensions..js (module.js:579:10)\r\n    at Module.load (module.js:487:32)\r\n\n27 Feb 2018 16:09:50\nexit\n1\n27 Feb 2018 16:09:53\nstdout\nListening on 8081.\n\n27 Feb 2018 16:10:08\nstdout\nListening on 8082.\n\n27 Feb 2018 16:10:10\nexit\nnull\n27 Feb 2018 16:10:14\nstdout\nListening on 8082.\n\n27 Feb 2018 16:10:15\nexit\nnull\n27 Feb 2018 16:10:20\nstdout\nListening on 8082.\n\n27 Feb 2018 16:10:21\nexit\nnull\n27 Feb 2018 16:10:28\nstdout\nListening on 8082.\n\n27 Feb 2018 16:10:29\nexit\nnull\n27 Feb 2018 16:10:32\nstdout\nListening on 8082.\n\n27 Feb 2018 16:10:32\nexit\nnull\n27 Feb 2018 16:11:14\nstdout\nListening on 8082.\n\n27 Feb 2018 16:11:15\nexit\nnull\n27 Feb 2018 16:11:17\nstdout\nListening on 8082.\n\n27 Feb 2018 16:11:18\nexit\nnull\n27 Feb 2018 16:11:50\nstdout\nListening on 8082.\n\n27 Feb 2018 16:11:50\nexit\nnull\n27 Feb 2018 16:11:53\nstdout\nListening on 8082.\n\n27 Feb 2018 16:11:53\nexit\nnull\n27 Feb 2018 16:14:15\nstdout\nListening on 8082.\n\n27 Feb 2018 16:14:17\nexit\nnull\n27 Feb 2018 16:14:21\nstdout\nListening on 8082.\n\n27 Feb 2018 16:14:22\nexit\nnull\n27 Feb 2018 16:14:26\nstdout\nListening on 8082.\n\n27 Feb 2018 16:14:26\nexit\nnull\n"
+        }
+    ]
+}

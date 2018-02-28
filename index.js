@@ -1,6 +1,10 @@
 'use strict';
 
 const config = require('./app/config');
+const util = require('./app/core/utility');
+
+util.resetServers();
+
 const express = require('./app/core/express');
 
 const api = require('./app/core/api')(express);

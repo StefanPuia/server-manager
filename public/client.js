@@ -1,7 +1,7 @@
 'use strict';
 
 let ws = new WebSocket("ws://" + window.location.hostname + ":" + (window.location.port || 80) + "/");
-let statuses = ['starting', 'running', 'stopping', 'stopped', 'error', 'not found']
+let statuses = ['starting', 'running', 'stopping', 'stopped', 'error', 'not found', 'configuration not valid']
 
 
 window.addEventListener('load', function() {
@@ -25,7 +25,7 @@ function callSocket(payload) {
 async function callServer(url, options, callback) {
 	const response = await fetch(url, options);
     if (!response.ok) {
-        el.textContent = "Server error:\n" + response.status;
+        log("Server error:\n" + response.status);
         return;
     }
 
@@ -87,7 +87,7 @@ function receivedMessageFromServer(e) {
     	break;
 
     	case 'exit':
-    		log(data.name + ': Process exited with code ' + data.code);
+    		log(data.name + ': Process exited with code ' + data.raw);
     		displayStartStop(data.name, 1, 0);
     	break;
 
@@ -139,13 +139,21 @@ function serverVisit(e) {
 }
 
 function serverSettings(e) {
-
+    let name = e.currentTarget.dataset.name;
+    callServer('/api/server/' + name, {}, function(data) {
+        window.location = '/settings?name=' + name;
+    })
 }
 
 function serverLogs(e) {
 	let name = e.currentTarget.dataset.name;
 	callServer('/api/server/' + name + '/logs', {}, function(data) {
-    	log(JSON.stringify(data, null, 4));
+        if(data.logs) {
+            log(name.toLowerCase() + " logs:\n" + data.logs);
+        }
+        else {
+            log(name.toLowerCase() + " has no logs.")
+        }
 	});
 }
 

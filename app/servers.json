@@ -1,24 +1,48 @@
 {
     "servers": [
         {
-            "name": "EZWallet",
-            "path": "nodemon C:/Users/steph/GitHub/INSE-EZWallet/index.js",
-            "config": "C:/Users/steph/GitHub/INSE-EZWallet/app/config/index.js",
-            "portvar": "serverPort",
-            "port": "8080",
-            "running": false,
-            "app": "node.exe",
-            "logs": []
+            "name": "tekkit-1-2-9g",
+            "app": "X:/Servers/Tekkit-1.2.9g/test.bat",
+            "parameters": "",
+            "config": "X:/Servers/Tekkit-1.2.9g/server.properties",
+            "portvar": "server-port",
+            "port": "25565",
+            "logs": "27 Feb 2018 23:48:57\nstdout\n\r\nfakepath\\server-manager>echo \"hey\" 1>test.txt \r\n\n27 Feb 2018 23:48:57\nexit\n0\n",
+            "oldname": "tekkit-1-2-9g",
+            "running": false
         },
         {
-            "name": "EZWallet2",
-            "path": "nodemon C:/Users/steph/GitHub/INSE-EZWallet/index.js",
-            "config": "C:/Users/steph/GitHub/INSE-EZWallet/app/config/index.js",
+            "name": "show-dir-a",
+            "app": "cmd.exe",
+            "parameters": "/k echo hello",
+            "config": "C:/Users/steph/Documents/GitHub/WS-Planner/app/config/index.js",
+            "portvar": "serverPort",
+            "port": "8081",
+            "logs": "27 Feb 2018 18:08:12\nstdout\nMicrosoft Windows [Version 10.0.16299.248]\n(c) 2017 Microsoft Corporation. All rights reserved.\n\n27 Feb 2018 18:08:12\nstdout\n\nfakepath\\server-manager>\n27 Feb 2018 18:09:12\nstdout\nMicrosoft Windows [Version 10.0.16299.248]\n(c) 2017 Microsoft Corporation. All rights reserved.\n\n27 Feb 2018 18:09:12\nstdout\n\nfakepath\\server-manager>\n27 Feb 2018 18:09:18\nexit\nnull\n27 Feb 2018 18:09:21\nstdout\nMicrosoft Windows [Version 10.0.16299.248]\n(c) 2017 Microsoft Corporation. All rights reserved.\n\n\n27 Feb 2018 18:09:21\nstdout\nfakepath\\server-manager>\n27 Feb 2018 18:09:41\nstdout\nMicrosoft Windows [Version 10.0.16299.248]\n(c) 2017 Microsoft Corporation. All rights reserved.\n\n27 Feb 2018 18:09:41\nstdout\n\nfakepath\\server-manager>\n27 Feb 2018 18:09:46\nexit\nnull\n27 Feb 2018 18:09:47\nstdout\nMicrosoft Windows [Version 10.0.16299.248]\n(c) 2017 Microsoft Corporation. All rights reserved.\n\nfakepath\\server-manager>\n27 Feb 2018 18:09:49\nexit\nnull\n27 Feb 2018 18:09:54\nstdout\nMicrosoft Windows [Version 10.0.16299.248]\n(c) 2017 Microsoft Corporation. All rights reserved.\n\nfakepath\\server-manager>\n27 Feb 2018 18:09:56\nexit\nnull\n27 Feb 2018 18:12:28\nstderr\nParameter format not correct - \"\"\".\n\n27 Feb 2018 18:12:28\nstdout\n\nfakepath\\server-manager>\n27 Feb 2018 18:13:12\nstderr\n'\\\"dir /a\\\"\"' is not recognized as an internal or external command,\noperable program or batch file.\n\n27 Feb 2018 18:13:12\nstdout\n\nfakepath\\server-manager>\n27 Feb 2018 18:13:35\nstdout\nhello\"\r\n\n27 Feb 2018 18:13:35\nstdout\n\r\nfakepath\\server-manager>\n",
+            "oldname": "show-dir-a",
+            "running": false
+        },
+        {
+            "name": "WS-Planner",
+            "app": "node.exe",
+            "parameters": "C:/Users/steph/Documents/GitHub/WS-Planner/index.js",
+            "config": "C:\\Users\\steph\\Documents\\GitHub\\WS-Planner\\app\\config\\index.js",
+            "portvar": "serverPort",
+            "port": "8081",
+            "logs": "27 Feb 2018 17:57:21\nstdout\nListening on 8085.\n\n27 Feb 2018 18:04:22\nstderr\nevents.js:160\r\n      throw er; // Unhandled 'error' event\r\n      ^\r\n\r\nError: listen EADDRINUSE :::8085\r\n    at Object.exports._errnoException (util.js:1020:11)\r\n    at exports._exceptionWithHostPort (util.js:1043:20)\r\n    at Server._listen2 (net.js:1262:14)\r\n    at listen (net.js:1298:10)\r\n    at Server.listen (net.js:1394:5)\r\n    at Object.<anonymous> (fakepath\\index.js:22:10)\r\n    at Module._compile (module.js:570:32)\r\n    at Object.Module._extensions..js (module.js:579:10)\r\n    at Module.load (module.js:487:32)\r\n    at tryModuleLoad (module.js:446:12)\r\n\n27 Feb 2018 18:04:22\nexit\n1\n27 Feb 2018 18:04:27\nstdout\nListening on 8081.\n\n27 Feb 2018 18:04:29\nexit\nnull\n",
+            "oldname": "ws-planner",
+            "running": false
+        },
+        {
+            "name": "EZWallet",
+            "app": "node.exe",
+            "parameters": "C:/Users/steph/Documents/GitHub/EZWallet/index.js",
+            "config": "C:/Users/steph/Documents/GitHub/EZWallet/app/config/index.js",
             "portvar": "serverPort",
             "port": "8080",
-            "running": false,
-            "app": "node.exe",
-            "logs": []
+            "logs": "",
+            "oldname": "ezwallet",
+            "running": false
         }
     ]
 }

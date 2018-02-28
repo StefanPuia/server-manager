@@ -3,6 +3,7 @@
 const config = require('./../config');
 const util = require('./utility');
 
+const dateFormat = require('dateformat');
 const fs = require('fs');
 const http = require('http');
 const WebSocket = require('ws');
@@ -20,7 +21,7 @@ module.exports = function(app) {
 	wss.on('connection', function connection(ws, req) {
 		clients.push(ws);
 
-	    ws.on('error', (err) => {console.log(err)});
+	    ws.on('error', (err) => {});
 
 		    // listen for messages
 	    ws.on('message', function incoming(message) {
@@ -35,91 +36,85 @@ module.exports = function(app) {
 
 	        switch(message.method) {
 	        	case 'start':
-	        		fs.readFile(config.servers, 'utf8', function(err, fileData) {
-						if(err) throw err;
-						util.findServerByName(message.name, JSON.parse(fileData).servers, function(server) {
-							util.findServerByName(message.name, runningServers, function(running) {
-								if(running && typeof running.running != 'undefined') {
-									if(running.running == true) {
+					util.findServerByName(message.name, function(server) {
+						if(typeof server.running != 'undefined') {
+							if(server.running == true) {
+								wsAllSend(JSON.stringify({
+									name: server.name,
+									type: 'status',
+									status: config.status.running
+								}));
+							}
+							else {
+								if(server.app && server.config && server.portvar && server.port) {
+									util.setConfigPort(server, message.port, function() {
+										server.running = true;
+										let serverProcess = {
+											name: server.name
+										}
+
 										wsAllSend(JSON.stringify({
 											name: server.name,
 											type: 'status',
-											status: config.status.running
-										}));
-									}
-									else {
-										util.setConfigPort(server, message.port, function() {
-											running.running = true;
-											running.process = util.startServer(running, function(string) {
-												let log = {
-													timestamp: new Date(),
-													log: JSON.parse(string)
-												}
-												running.logs.push(log);
-												running.port = message.port;
-												util.updateServer(running, JSON.parse(fileData).servers, function(servers) {
-													fs.writeFile(config.servers, JSON.stringify(servers, null, 4));
-													wsAllSend(string);
-												})
-											})
-											wsAllSend(JSON.stringify({
-												name: server.name,
-												type: 'status',
-												status: config.status.starting
-											}));
-										})
-									}
-									
-								}
-								else if(server) {
-									util.setConfigPort(server, message.port, function() {									
-										server.running = true;
-										if(typeof server.logs == 'undefined') {
-											server.logs = [];
-										}
-										server.process = util.startServer(server, function(string) {
-											let log = {
-												timestamp: new Date(),
-												log: JSON.parse(string)
-											}
-											server.logs.push(log);
-											server.port = message.port;
-											util.updateServer(server, JSON.parse(fileData).servers, function(servers) {
-												fs.writeFile(config.servers, JSON.stringify(servers, null, 4));
-												wsAllSend(string);
-											})
-										})
-										
-										runningServers.push(server);
-										wsAllSend(JSON.stringify({
-											name: server.name,
-										type: 'status',
 											status: config.status.starting
 										}));
+
+										serverProcess.process = util.startServer(server, function(string) {
+											let output = JSON.parse(string);
+											let now = new Date();
+											let timestamp = dateFormat(now, "dd mmm yyyy HH:MM:ss");
+											let log = timestamp + "\n" + output.type + "\n" + output.raw + "\n";
+											server.logs += log;
+											server.port = message.port;
+											util.updateServer(server, function() {
+												wsAllSend(string);
+											})
+											runningServers.push(serverProcess);
+										})
 									})
 								}
 								else {
 									wsAllSend(JSON.stringify({
-										name: message.name,
+										name: server.name,
 										type: 'status',
-										status: config.status.notfound
+										status: config.status.confignotvalid
 									}));
 								}
-							});
-						});						
-					})
+							}
+							
+						}
+						else {
+							wsAllSend(JSON.stringify({
+								name: message.name,
+								type: 'status',
+								status: config.status.notfound
+							}));
+						}
+					});	
 				break;
 
 				case 'stop':
-					util.findServerByName(message.name, runningServers, function(running) {
-						if(running && typeof running.running != 'undefined' && running.running == true) {
-							running.process.kill();
-							running.running = false;
-							wsAllSend(JSON.stringify({
-								name: running.name,
-								type: 'status',
-								status: config.status.stopped
-							}));
+					util.findRunningServerByName(message.name, runningServers, function(server, serverProcess, index) {
+						if(server) {
+							if(typeof server.running != 'undefined' && server.running == true) {
+								serverProcess.kill();
+								server.running = false;
+								util.updateServer(server, function() {
+									wsAllSend(JSON.stringify({
+										name: server.name,
+										type: 'status',
+										status: config.status.stopping
+									}));
+									runningServers.splice(index, 1);
+								})
+							}
+							else {
+								wsAllSend(JSON.stringify({
+									name: message.name,
+									type: 'status',
+									status: config.status.stopped
+								}));
+							}
 						}
 						else {
 							wsAllSend(JSON.stringify({
@@ -132,13 +127,13 @@ module.exports = function(app) {
 				break;
 
 				case 'send':
-					util.findServerByName(message.name, runningServers, function(running) {
-						if(running && typeof running.running != 'undefined' && running.running == true) {
-							running.process.stdin.setEncoding('utf-8');
-							running.process.stdin.write(`${message.payload}\n`);
-							running.running = false;
+					util.findRunningServerByName(message.name, runningServers, function(server) {
+						if(server && typeof server.running != 'undefined' && server.running == true) {
+							server.process.stdin.setEncoding('utf-8');
+							server.process.stdin.write(`${message.payload}\n`);
+							server.running = false;
 							wsAllSend(JSON.stringify({
-								name: running.name,
+								name: server.name,
 								type: 'status',
 								status: config.status.stopped
 							}));

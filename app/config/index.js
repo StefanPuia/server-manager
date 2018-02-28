@@ -13,5 +13,6 @@ module.exports = {
 		stopped: 3,
 		error: 4,
 		notfound: 5,
+		confignotvalid: 6
 	}
 }

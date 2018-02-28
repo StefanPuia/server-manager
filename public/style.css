@@ -58,3 +58,14 @@ main {
 #server-settings {
 	visibility: hidden;
 }
+
+#inputServerLogs {
+	resize: vertical;
+	height: 15em;
+	min-height: 15em;
+}
+
+#saveConfirmed {
+	color: green;
+	display: none;
+}

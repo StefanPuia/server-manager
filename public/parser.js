@@ -1,3 +1,5 @@
+'use strict';
+
 function $(query) {
 	let result = document.querySelectorAll(query);
 	return result;
