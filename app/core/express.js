@@ -11,6 +11,16 @@ app.use('/public', express.static('public'))
 
 module.exports = app;
 
+// log all requests to console
+app.use('/', (req, res, next) => {
+    let ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
+    if (ip.substr(0, 7) == "::ffff:") {
+        ip = ip.substr(7)
+    }
+    if(config.verbose) console.log(new Date(), ip, req.method, req.url);
+    next();
+});
+
 app.get('/', function(req, res) {
 	if(typeof req.query.port != 'undefined') {
 		let port = req.query.port;
